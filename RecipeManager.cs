@@ -7,16 +7,16 @@ using System.Linq;
 namespace recc
 {
 
-    public delegate void delDisplayNotification();
-    //The RecipeManager class is used to manage the recipe where you can add users and so on
+    public delegate void delDisplayNotification();//This is a delegate declared that will display a notification to the user when user exceeds 300 calories
+    //The RecipeManager class is used to manage the recipe where you can modify recipes
     public class RecipeManager
     {
 
         public int calorie;
 
 
-        private List<Recipe> recipes;
-        private List<Recipe2> copiedRecipes;
+        private List<Recipe> recipes;//Creates a hidden list that repesents a field for the recipes list
+        private List<RecipeCopy> copiedRecipes;//Creates a hidden copied list that repesents a field for the recipes list
 
 
         int choice = 0;
@@ -26,20 +26,20 @@ namespace recc
 
         public RecipeManager()
         {
-
-            recipes = new List<Recipe>();
-            copiedRecipes = new List<Recipe2>();
+            
+            recipes = new List<Recipe>();//This creates a new instance of the recipes generic list
+            copiedRecipes = new List<RecipeCopy>();//This creates a new instance of the copied recipes generic list
 
         }
-        public static void DisplayNotification()
+        public static void DisplayNotification()//This method will be used to notify if user exceeds 300 calories 
         {
            Console.ForegroundColor= ConsoleColor.Red;
-            Console.WriteLine("\"Warning!!! The recipe exceeds 300 calories!\" + \"\\n\" + \"This means that the recipe is relatively high in calories compared to other recipes.\" + \"\\n\" + \"Please consider portion sizes and overall dietary balance when consuming high-calorie recipes\"");
+            Console.WriteLine("Warning!!! The recipe exceeds 300 calories!" + "\n" + "This means that the recipe is relatively high in calories compared to other recipes." + "\n" + "Please consider portion sizes and overall dietary balance when consuming high-calorie recipes");
             Console.ForegroundColor = ConsoleColor.White;
         }
 
 
-        public void EnterRecipe()
+        public void EnterRecipe()//method for when the user enters a recipe
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("----------------------------------------------------");
@@ -52,13 +52,13 @@ namespace recc
 
 
 
-            RecipeManager cal = new RecipeManager();
+           
             bool addingRecipe = false;
 
             while (addingRecipe == false)
             {
                 Recipe recipe = new Recipe();
-                Recipe2 recipe2 = new Recipe2();
+                RecipeCopy recipe2 = new RecipeCopy();
 
 
 
@@ -84,7 +84,7 @@ namespace recc
 
 
                 recipe.Ingredients = new List<Ingredient>();
-                recipe2.Ingredient2 = new List<Ingredient2>();
+                recipe2.Ingredient2 = new List<IngredientCopy>();
                 recipe.Instructions = new List<Step>();
 
 
@@ -94,14 +94,10 @@ namespace recc
 
 
 
-                while (addingIngredients)
+                while (addingIngredients)//This will result in the user being constantly prompted to enter the ingredients until user wishes to exit
                 {
-                    Ingredient ingredient = new Ingredient();
-                    Ingredient2 ingredient2 = new Ingredient2();//This variable creates a 
-
-
-                    //Applies to exception handling, this boolean checks to see that the number of instructions is a number and not any other invalid input
-
+                    Ingredient ingredient = new Ingredient();//This creates a new instance of the Ingredient class
+                    IngredientCopy ingredient2 = new IngredientCopy();//This creates a new instance of a copied Ingredient class 
 
 
                     Console.WriteLine("Enter ingredient name (or 'done' to finish):");
@@ -114,7 +110,7 @@ namespace recc
                         break;
                     }
 
-                    ingredient.Name = ingredientName;
+                    ingredient.Name = ingredientName;//The prompt takes a string and assign it as the name of ingredient
                     ingredient2.Name = ingredientName;
 
                     bool isQuantityValid = false;//Applies to exception handling, this boolean checks to see that the unit selected as a number is a number and not any other invalid input
@@ -123,7 +119,7 @@ namespace recc
                     {
                         try//Overall this will try the following prompts and if it catches an exception/error, it will display the appropriate message and will let the user re-enter the value
                         {
-                            Console.WriteLine("Enter quantity:");
+                            Console.WriteLine("Enter quantity:");//This is the quantity of ingredient
                             ingredient.Quantity = Convert.ToDouble(Console.ReadLine());
                             ingredient2.Quantity = ingredient.Quantity;
                             isQuantityValid = true;
@@ -146,7 +142,7 @@ namespace recc
                             if (choice1 == 1)
                             {
                                 ingredient.UnitOfMeasurement = "Pinch";
-                                ingredient2.UnitOfMeasurement = "Pinch";//for all these if statements below, when the user selects a unit of measurements, the selected value gets assigned to the unitMeasure array
+                                ingredient2.UnitOfMeasurement = "Pinch";//for all these if statements below, when the user selects a unit of measurements, the selected value gets assigned to the unitMeasure property in the ingredients class
                             }
 
                             if (choice1 == 2)
@@ -189,7 +185,7 @@ namespace recc
                     {
                         try//Overall this will try the following prompts and if it catches an exception/error, it will display the appropriate message and will let the user re-enter the value
                         {
-                            Console.WriteLine("Enter food calories:");
+                            Console.WriteLine("Enter food calories:");//This is the calories for the ingredient
                             Console.WriteLine("------------------------------------------------------------------------------------------------------------");
                             Console.ForegroundColor = ConsoleColor.Yellow;
 
@@ -222,7 +218,7 @@ namespace recc
 
                             if (choice3 == 1)
                             {
-                                ingredient.FoodGroup = "Starchy foods";//for all these if statements below, when the user selects a unit of measurements, the selected value gets assigned to the unitMeasure array
+                                ingredient.FoodGroup = "Starchy foods";//for all these if statements below, when the user selects a food group, the selected value gets assigned to the food group property
                                 ingredient2.FoodGroup = ingredient.FoodGroup;
                             }
 
@@ -267,9 +263,9 @@ namespace recc
                         }
 
                     }
-                    recipe.Ingredients.Add(ingredient);
+                    recipe.Ingredients.Add(ingredient);//It adds all the values for the ingredients class and adds them to the recipe
                     recipe2.Ingredient2.Add(ingredient2);
-                    int totalCalories = CalculateTotalCalories(recipe.Ingredients);
+                    int totalCalories = CalculateTotalCalories(recipe.Ingredients);//Ater the user enters the caloris this method calculates it to add up the total calories and give the appropriate message
 
 
                 }
@@ -277,15 +273,15 @@ namespace recc
 
 
                 bool addingInstructions = true;
-                while (addingInstructions)
+                while (addingInstructions)//will comstantly prompt the user to add instruction until the user wishes to exit
                 {
 
 
-                    Step instruction = new Step();
+                    Step instruction = new Step();//Creates a new instance for the step class so that it can take in values as instructions
                     bool isInstructionValid = false;//Applies to exception handling, this boolean checks to see that the number of instructions is a number and not any other invalid input
 
 
-                    while (isInstructionValid.Equals(false))
+                    while (isInstructionValid.Equals(false))//results in users being constantly prompted to enter correct values
                     {
                         Console.WriteLine("Enter instructions or done to finish:");
                         string instructions = Console.ReadLine();
@@ -307,18 +303,18 @@ namespace recc
                             break;
                         }
 
-                        instruction.Steps = instructions;
-                        recipe.Instructions.Add(instruction);
+                        instruction.Steps = instructions;//Takes the string used and assigns it to the instruction method
+                        recipe.Instructions.Add(instruction);//After assigned it gets added to the recipe class
 
                     }
                 }
 
                 recipes.Add(recipe);
                 copiedRecipes.Add(recipe2);
-                recipes.Sort((r1, r2) => string.Compare(r1.Name, r2.Name, StringComparison.OrdinalIgnoreCase));
+                recipes.Sort((r1, r2) => string.Compare(r1.Name, r2.Name, StringComparison.OrdinalIgnoreCase));//Used to sort the recipe names in alphabetical order
 
 
-                Console.OutputEncoding = System.Text.Encoding.UTF8;
+              
 
                 Console.WriteLine("INGREDIENTS ENTERED CRRECTLY");
 
@@ -369,7 +365,7 @@ namespace recc
             return total;
         }
 
-        public void AlterQuantity()
+        public void AlterQuantity()//This method is to amend the quantity of ingredients by scaling, converting units of measurement
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("----------------------------------------------------");
@@ -399,7 +395,7 @@ namespace recc
                 if (selectedRecipeIndex > 0 && selectedRecipeIndex <= recipes.Count)
                 {
 
-                    Recipe recipeToScale = recipes[selectedRecipeIndex - 1];
+                    Recipe recipeToScale = recipes[selectedRecipeIndex - 1];//inds the recipe based on the index requested
                     double comma;
                     foreach (Ingredient ingredient in recipeToScale.Ingredients)
                     {
@@ -409,7 +405,7 @@ namespace recc
                         if (choice == 1)
                         {
 
-                            ingredient.Quantity = ingredient.Quantity * 0.5;
+                            ingredient.Quantity = ingredient.Quantity * 0.5;//if user chooses 1 to half the ingredients, the quanity of the ingredient will be halfed with this arithemtic operation
 
                             if (ingredient.Quantity >= 16 && ingredient.UnitOfMeasurement.Equals("Pinch"))
                             {
@@ -475,18 +471,19 @@ namespace recc
                                 ingredient.Quantity = comma;
                                 ingredient.UnitOfMeasurement = "Pint";
                             }
+                            Console.Clear();
                             Console.WriteLine("Recipe scaled successfully");
 
 
-                            Console.Clear();
+                            
                             return;
                         }
 
                         if (choice == 2)
                         {
 
-                            ingredient.Quantity = ingredient.Quantity * 2;
-                            ingredient.Quantity = ingredient.Quantity * 0.5;
+                            ingredient.Quantity = ingredient.Quantity * 2;//if user chooses 1 to half the ingredients, the quanity of the ingredient will be halfed with this arithemtic operation
+
 
                             if (ingredient.Quantity >= 16 && ingredient.UnitOfMeasurement.Equals("Pinch"))
                             {
@@ -552,17 +549,13 @@ namespace recc
                                 ingredient.Quantity = comma;
                                 ingredient.UnitOfMeasurement = "Pint";
                             }
-                            Console.WriteLine("Recipe scaled successfully");
-
-
-                            Console.Clear();
-                            return;
+                           
                         }
                         if (choice == 3)
                         {
 
-                            ingredient.Quantity = ingredient.Quantity * 3;
-                            ingredient.Quantity = ingredient.Quantity * 0.5;
+                            ingredient.Quantity = ingredient.Quantity * 3;//if user chooses 1 to half the ingredients, the quanity of the ingredient will be halfed with this arithemtic operation
+
 
                             if (ingredient.Quantity >= 16 && ingredient.UnitOfMeasurement.Equals("Pinch"))
                             {
@@ -628,22 +621,23 @@ namespace recc
                                 ingredient.Quantity = comma;
                                 ingredient.UnitOfMeasurement = "Pint";
                             }
+
+                            Console.Clear();
                             Console.WriteLine("Recipe scaled successfully");
 
 
-                            Console.Clear();
                             return;
-                            // Add your code for what happens when the user presses Enter
+                        
 
 
                         }
 
-                        if (choice == 4)
+                        if (choice == 4)//This will reset the values of the ingredients to its original value
                         {
                             if (selectedRecipeIndex > 0 && selectedRecipeIndex <= copiedRecipes.Count)
                             {
-                                Recipe recipeToReset = recipes[selectedRecipeIndex - 1];
-                                Recipe2 recipe2 = copiedRecipes[selectedRecipeIndex - 1];
+                                Recipe recipeToReset = recipes[selectedRecipeIndex - 1];//gets the index of the recipe to reset
+                                RecipeCopy recipe2 = copiedRecipes[selectedRecipeIndex - 1];//gets the index of the recipe that will provide the original values
                                 foreach (Ingredient ingredient1 in recipeToReset.Ingredients)
                                     recipeToReset.Ingredients = recipe2.Ingredient2.Select(Ingredient2 => new Ingredient
                                     {
@@ -652,15 +646,23 @@ namespace recc
                                         UnitOfMeasurement = Ingredient2.UnitOfMeasurement,
                                         Calories = Ingredient2.Calories,
                                         FoodGroup = Ingredient2.FoodGroup,
-                                    }).ToList();
+                                    }).ToList();//Assigns the copied recipe that has the original values therefore resetting it
                             }
+                            Console.Clear();
                             Console.WriteLine("Recipe reset successfully");
 
 
-                            Console.Clear();
+                           
                             return;
                         }
+                     
                     }
+                    Console.Clear();
+                    Console.WriteLine("Recipe scaled successfully");
+
+
+
+                    return;
                 }
             }
 
@@ -671,7 +673,7 @@ namespace recc
             }
         }
 
-        public void DisplayAllRecipes()
+        public void DisplayAllRecipes()//This method displays all the recipes
         {
 
             Console.Clear();
@@ -682,7 +684,7 @@ namespace recc
             Console.WriteLine("----------------------------------------------------");
             Console.ForegroundColor = ConsoleColor.White;
             string input = null;
-            foreach (Recipe recipe in recipes)
+            foreach (Recipe recipe in recipes)//It gets the recipe instance in the recipe class to view the recipe
             {
                 if (recipe.Name.Equals(null))
                 {
@@ -700,11 +702,11 @@ namespace recc
                     Console.WriteLine("----------------------------------------------------");
                     Console.WriteLine("List of recipes:");
 
-                    Console.WriteLine($"{recipeIndex}. {recipe.Name}");
+                    Console.WriteLine($"{recipeIndex}. {recipe.Name}");//Displays the list of recipes in alphabetical order
                     recipeIndex++;
                     Console.WriteLine("----------------------------------------------------");
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("Select a recipe (enter the corresponding number): ");
+                    Console.Write("Select a recipe (enter the corresponding number): ");//Use a number to slect the recipes displayed
                     input = Console.ReadLine();
                 }
             }
@@ -713,13 +715,13 @@ namespace recc
 
             if (int.TryParse(input, out int selectedRecipeIndex))
             {
-                if (selectedRecipeIndex > 0 && selectedRecipeIndex <= recipes.Count)
+                if (selectedRecipeIndex > 0 && selectedRecipeIndex <= recipes.Count)//Checks to see if the recipe is identified and exists
                 {
 
-                    Recipe selectedRecipe = recipes[selectedRecipeIndex - 1];
+                    Recipe selectedRecipe = recipes[selectedRecipeIndex - 1];//Fetches the recipe based its position searched for
                     int totalCalories = CalculateTotalCalories(selectedRecipe.Ingredients);
                     Console.ForegroundColor = ConsoleColor.Magenta;
-
+                    Console.Clear();    
                     Console.WriteLine("----------------------------------------------------");
                     Console.WriteLine($"\t\t\tRecipe: {selectedRecipe.Name.ToUpper()}");
                     Console.ForegroundColor = ConsoleColor.Magenta;
@@ -763,7 +765,7 @@ namespace recc
                         index++;
                         Console.WriteLine("Step " + index + " " + instruction.Steps);
                     }
-                    Console.WriteLine("Total calories is: " + totalCalories);
+                    Console.WriteLine("Total calories is: " + totalCalories);//Uses a total calories variable that was assigned the total calories method to determine the calorie range for the total calories
 
                     if (totalCalories < 100)
                     {
@@ -778,7 +780,7 @@ namespace recc
                     else if (totalCalories >= 300 && totalCalories < 500)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        Console.WriteLine("Calorie Range: High (300 - 499)");
+                        Console.WriteLine("Calorie Range: High (300 - 499)");//displays calorie range
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                     else if (totalCalories >= 500)
@@ -796,8 +798,8 @@ namespace recc
                     if (keyInfo.Key == ConsoleKey.Enter)
                     {
                         Console.Clear();
-                        return;
-                        // Add your code for what happens when the user presses Enter
+                        return;//when user presses enter the application returns to the main menu screen
+                       
 
                     }
 
@@ -831,20 +833,20 @@ namespace recc
             }
 
             Console.Write("Select a recipe (enter the corresponding number): ");
-            string input = Console.ReadLine();
+            string input = Console.ReadLine();//selects the recipe from the list of recipes to delete
 
             if (int.TryParse(input, out int selectedRecipeIndex))
             {
-                if (selectedRecipeIndex > 0 && selectedRecipeIndex <= recipes.Count)
+                if (selectedRecipeIndex > 0 && selectedRecipeIndex <= recipes.Count)//uses to see if the recipe exist
                 {
 
-                    Recipe recipeToRemove = recipes[selectedRecipeIndex - 1];
+                    Recipe recipeToRemove = recipes[selectedRecipeIndex - 1];//fetches the variable by the requested position
                     Console.WriteLine("Are you sure you want to remove recipe??" + "\n" + "Press 1 for yes and 2 for no");
                     int choice3 = Convert.ToInt32(Console.ReadLine());
 
                     if (choice3 > 1)
                     {
-                        recipes.Remove(recipeToRemove);
+                        recipes.Remove(recipeToRemove);//Once user is asked are you sure the recipes gets removed from the recipes list
                         Console.Clear();
 
                         Console.WriteLine("Recipe cleared successfully.");

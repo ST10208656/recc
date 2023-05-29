@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace recc
 {
-    public class Ingredient
+    public class Ingredient//This class has properties that represent the ingredients of a recipe
     {
       
      
-        public string Name { get;                                                                                                                                          set; }
-        public double Quantity { get; set; }
-        public string UnitOfMeasurement { get; set; }
-        public int Calories { get; set; }
-      
-        public string FoodGroup { get; set; }
+        public string Name { get; set; } //This is a property the represents the name of a ingredient
+        public double Quantity { get; set; }//This is a property the represents the quantity of a ingredient
+        public string UnitOfMeasurement { get; set; }//This is a property the represents the unit of measurement of a ingredient
+        public int Calories { get; set; }//This is a property the represents the calories of a ingredient
+
+        public string FoodGroup { get; set; }//This is a property the represents the food group of a ingredient
 
     }
 }

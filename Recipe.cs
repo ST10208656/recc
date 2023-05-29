@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace recc
 {
     
-    public class Recipe
+    public class Recipe//This class will have properties that represent the recipe
     {
         
-        public string Name { get; set; }
-        public List<Ingredient> Ingredients { get; set; }
+        public string Name { get; set; }//This is a property the represents the name of the recipe
+        public List<Ingredient> Ingredients { get; set; }//This is a property the represents the list of ingredients for the recipe
 
-        public List<Step> Instructions { get; set; }
-        public List<Ingredient> OriginalIngredients { get; set; }
+        public List<Step> Instructions { get; set; }//This is a property the represents the list of instructions for the recipe
+        public List<Ingredient> OriginalIngredients { get; set; }//This is a property the represents a copied list of ingredients for the recipe
 
-       
+
     }
 }

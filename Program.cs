@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace recc
 {
     
-    public class Ingredient2
+    public class IngredientCopy//This class is a copy for the ingredients in a recipe that will come in useful when resetting to default values
     {
         public string Name { get; set; }
         public double Quantity { get; set; }
@@ -22,24 +22,19 @@ namespace recc
     
     // Recipe class
     
-    public class Recipe2
+    public class RecipeCopy//This class is a copy for the ingredients in a recipe that will come in useful when resetting to default values
     {
+        //It contains the same properties for the original recipe and above the same properties for the ingredients
         public string Name { get; set; }
-        public List<Ingredient2> Ingredient2 { get; set; }
+        public List<IngredientCopy> Ingredient2 { get; set; }
       
     }
 
-    // RecipeApp class
-
-    
-
-    // Example usage
     public class Program
     {
         public static void Main()
         {
-           /*Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);*/
+          
             RecipeManager app = new RecipeManager();
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("----------------------------------------------------");
@@ -50,22 +45,25 @@ namespace recc
             Console.WriteLine("Press Enter to continue or any other key to exit...");
 
             ConsoleKeyInfo keyInfo = Console.ReadKey();
-
+            //The prompt uses a key to continue to enter recipe
             if (keyInfo.Key == ConsoleKey.Enter)
             {
+                //In order to not overload the code a clear method is used that will also help the console to appear better
                 Console.Clear();
+                //when user presses enter it immediately takes them to enter recipe
                 app.EnterRecipe();
-                // Add your code for what happens when the user presses Enter
+             
                
             }
             else
             {
                 System.Environment.Exit(0);
-                // Add your code for what happens when the user presses any other key
+                //The application will exit when the user presses any other key
             }
             bool running = true;
-            while (running)
+            while (running)//this displays the menu while the software is running
             {
+                
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("----------------------------------------------------");
                 Console.WriteLine("\t\tMAIN MENU");
