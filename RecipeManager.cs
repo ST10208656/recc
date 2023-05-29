@@ -33,12 +33,9 @@ namespace recc
         }
         public static void DisplayNotification()
         {
-            /*using (var warningMessageBox = new WarningMessageBox("Warning!!! The recipe exceeds 300 calories!" + "\n" + "This means that the recipe is relatively high in calories compared to other recipes." + "\n" + "Please consider portion sizes and overall dietary balance when consuming high-calorie recipes"))
-            {
-                Application.Run(warningMessageBox);
-            }*/
-            Console.WriteLine("Calories exceed");
-
+           Console.ForegroundColor= ConsoleColor.Red;
+            Console.WriteLine("\"Warning!!! The recipe exceeds 300 calories!\" + \"\\n\" + \"This means that the recipe is relatively high in calories compared to other recipes.\" + \"\\n\" + \"Please consider portion sizes and overall dietary balance when consuming high-calorie recipes\"");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
 

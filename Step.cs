@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace recc
 {
-    public class Step //Step class takes the steps 
+    public class Step //Step class takes the steps that the user will input 
     {
-        public string Steps { get; set; }
+        public string Steps { get; set; }//It comes with this field 
     }
 
 }
