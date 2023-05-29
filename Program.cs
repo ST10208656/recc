@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace recc
 {
@@ -38,8 +38,8 @@ namespace recc
     {
         public static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+           /*Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);*/
             RecipeManager app = new RecipeManager();
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("----------------------------------------------------");

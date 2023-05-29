@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace recc
 {
-    public class Step
+    public class Step //Step class takes the steps 
     {
         public string Steps { get; set; }
     }

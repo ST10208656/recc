@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using System.Windows.Forms;
+
 
 namespace recc
 {
@@ -33,10 +33,11 @@ namespace recc
         }
         public static void DisplayNotification()
         {
-            using (var warningMessageBox = new WarningMessageBox("Warning!!! The recipe exceeds 300 calories!" + "\n" + "This means that the recipe is relatively high in calories compared to other recipes." + "\n" + "Please consider portion sizes and overall dietary balance when consuming high-calorie recipes"))
+            /*using (var warningMessageBox = new WarningMessageBox("Warning!!! The recipe exceeds 300 calories!" + "\n" + "This means that the recipe is relatively high in calories compared to other recipes." + "\n" + "Please consider portion sizes and overall dietary balance when consuming high-calorie recipes"))
             {
                 Application.Run(warningMessageBox);
-            }
+            }*/
+            Console.WriteLine("Calories exceed");
 
         }
 
