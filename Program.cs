@@ -74,7 +74,7 @@ namespace recc
                 Console.WriteLine("3. Scale the quantity of the ingredients or reset the quantity");
                 Console.WriteLine("4. Clear data of a recipe");
                 Console.WriteLine("5. Exit");
-
+             
                 Console.WriteLine("Enter your choice:");
                 string choice = Console.ReadLine();
 
